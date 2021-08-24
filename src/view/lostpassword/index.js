@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './login.css';
+import './lostpassword.css';
 import arrowleft from '../../img/arrow-left.svg';
 import { Link, Redirect } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,38 +7,34 @@ import { useSelector, useDispatch } from 'react-redux';
 import firebase from '../../config/firebase';
 import 'firebase/auth';
 
-function Login() {
+function LostPassword() {
 
+    const [carregando, setCarregando] = useState(false);
     const [email, setEmail] = useState();
-    const [senha, setSenha] = useState();
-    const [carregando, setCarregando] = useState();
-    const [msgTipo, setMsgTipo] = useState();
+    const [msg, setMsg] = useState();
 
-    const dispatch = useDispatch();
-
-    function autenticar() {
+    function recuperar() {
         setCarregando(true);
-        if(!email || !senha) {
-            setMsgTipo('erro');
+        if(!email) {
+            setMsg('Verifique se você digitou o email está correto');
             setCarregando(false);
         } else {
-            firebase.auth().signInWithEmailAndPassword(email, senha).then( resultado => {
+            firebase.auth().sendPasswordResetEmail(email).then( resultado => {
+                setMsg('Um email para redefinir a sua senha foi enviado para a sua caixa de entrada');
                 setCarregando(false);
-                dispatch({type: 'LOGIN', usuarioEmail: email});
-            })
-            .catch( erro => {
+            }).catch( erro => {
+                setMsg('Verifique se você digitou o email está correto');
                 setCarregando(false);
-                setMsgTipo('erro');
             })
         }
     }
 
-    return (
+    return(
         <section id='login'>
             <div className='login-container'>
-                <Link to="/"><img className='icone' src={arrowleft} alt='voltar' /></Link>
+                <Link to="/login"><img className='icone' src={arrowleft} alt='voltar' /></Link>
                 <div className='text-container'>
-                    <h1>Login</h1>
+                    <h1>Recuperação de senha</h1>
                     <p>Por favor preencha os campos abaixo</p>
                 </div>
                 <form>
@@ -48,32 +44,33 @@ function Login() {
                             <label for="floatingInput">Email</label>
                         </div>
                     </div>
-                    <div className='input-container'>
+                    {/* <div className='input-container'>
                         <div className="form-floating">
                             <input type="password" onChange={(e) => setSenha(e.target.value)} className="form-control" id="floatingPassword" placeholder="Password" />
                             <label for="floatingPassword">Senha</label>
                         </div>
-                    </div>
-                    <button type="button" onClick={() => autenticar} className="btn btn-outline-dark">
-                    <span className='sr-only'>Login</span>
+                    </div> */}
+                    <button type="button" onClick={() => recuperar} className="btn btn-outline-dark">
+                    <span className='sr-only'>Recuperar Senha</span>
                     {
                         carregando ? <span className="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span> : null
                     }
                     </button>
                     <div className='text-center mt-1'>
                         {
-                            msgTipo === 'erro' && <span>Verifique se o seu email e senha estão corretos</span>
+                            <span>{msg}</span>
                         }
                     </div>
-                    <div className='link-container'>
+                    {/* <div className='link-container'>
                         <Link to='newuser' className='link'>Ainda não possui uma conta? Crie uma</Link>
-                        <Link className='link' to='/lostpassword'>Recuperar senha</Link>
-                    </div>
+                        <a className='link' href="cadastro.html">Recuperar senha</a>
+                    </div> */}
                 </form>
             </div>
         {   useSelector(state => state.usuarioLogado) > 0 ? <Redirect to='/' /> : null  }
         </section>
-    );
+    )
 }
 
-export default Login;
+
+export default LostPassword;

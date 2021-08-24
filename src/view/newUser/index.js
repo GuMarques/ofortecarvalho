@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import firebase from '../../config/firebase';
+import arrowleft from '../../img/arrow-left.svg';
+import { Link, Redirect } from 'react-router-dom';
 import 'firebase/auth';
 import './newUser.css';
 
@@ -12,7 +14,7 @@ function NewUser() {
     const [sobrenome, setSobrenome] = useState();
     const [msgTipo, setMsgTipo] = useState();
     const [disabled, setDisabled] = useState(false);
-    const [carregando, setCarregando] = useState()
+    const [carregando, setCarregando] = useState();
     const [msg, setMsg] = useState();
 
     function verificaEmail(e) {
@@ -37,6 +39,7 @@ function NewUser() {
             setMsg('Você não preencheu todos os campos!');
         } else {
             firebase.auth().createUserWithEmailAndPassword(email, senha).then( resultado => {
+                setMsgTipo('ok');
                 setCarregando(false);
                 setDisabled(false);
             }).catch(erro => {
@@ -64,9 +67,7 @@ function NewUser() {
     return (
         <section id="cadastro">
             <div className="cadastro-container">
-                <a href="index.html"
-                ><img className="icone" src="/src/icones/arrow-left.svg" alt="voltar"
-                /></a>
+                <Link to="/"><img className="icone" src={arrowleft} alt="voltar"/></Link>
                 <div className="text-container">
                     <h1>Cadastro</h1>
                     <p>Por favor preencha os campos abaixo</p>
@@ -132,7 +133,7 @@ function NewUser() {
                     <label for="floatingPassword">Senha</label>
                     </div>
                 </div>
-                <button type="button" onClick={(e) => cadastrar()} disabled={disabled} className="btn btn-outline-dark">
+                <button type="button" onClick={() => cadastrar()} disabled={disabled} className="btn btn-outline-dark">
                     <span className='sr-only'>Cadastro</span>
                     {
                         carregando ? <span className="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span> : null
@@ -145,6 +146,9 @@ function NewUser() {
                     </div>
                 </form>
             </div>
+            {
+                msgTipo === 'ok' ? <Redirect to='/login' /> : null
+            }
         </section>
     )
 }
