@@ -3,6 +3,7 @@ import './navbar.css';
 import logo from '../../img/logo.png';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link as Scroll} from 'react-scroll';
 
 function Navbar() {
 
@@ -55,73 +56,70 @@ function Navbar() {
                 <div className="menu-container">
                 <nav className="navbar navbar-expand-lg navbar-light">
                     <div className="container-fluid">
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <a
-                            className="nav-link active"
-                            aria-current="page"
-                            id="es"
-                            href="../index.html#escoceses"
-                            >
-                                Escoceses
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a
-                            className="nav-link active"
-                            aria-current="page"
-                            href="../index.html#irlandeses"
-                            >Irlandeses</a
-                            >
-                        </li>
-                        <li className="nav-item">
-                            <a
-                            className="nav-link active"
-                            aria-current="page"
-                            href="../index.html#americanos"
-                            >
-                                Americanos
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a
-                            className="nav-link active"
-                            aria-current="page"
-                            href="../index.html#japoneses"
-                            >
-                                Japoneses
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a
-                            className="nav-link active"
-                            aria-current="page"
-                            href="../index.html#brasileiros"
-                            >
-                                Brasileiros
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a
-                            className="nav-link active"
-                            aria-current="page"
-                            href="../index.html#canadenses"
-                            >
-                                Canadenses
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a
-                            className="nav-link active"
-                            aria-current="page"
-                            href="../sobre.html"
-                            >
-                                Sobre
-                            </a>
-                        </li>
-                        </ul>
-                    </div>
+                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul className="navbar-nav mb-2 mb-lg-0 width-100">
+                                 <li className="nav-item">
+                                    <Link
+                                    className="nav-link active"
+                                    aria-current="page"
+                                    id="es"
+                                    to="/"
+                                    >
+                                        Inicio
+                                    </Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Scroll
+                                    className="nav-link active"
+                                    aria-current="page"
+                                    to="irlandeses"
+                                    >Irlandeses</Scroll>
+                                </li>
+                                <li className="nav-item">
+                                    <Scroll
+                                    className="nav-link active"
+                                    aria-current="page"
+                                    to="americanos"
+                                    >
+                                        Americanos
+                                    </Scroll>
+                                </li>
+                                <li className="nav-item">
+                                    <Scroll
+                                    className="nav-link active"
+                                    aria-current="page"
+                                    to="japoneses"
+                                    >
+                                        Japoneses
+                                    </Scroll>
+                                </li>
+                                <li className="nav-item">
+                                    <Scroll
+                                    className="nav-link active"
+                                    aria-current="page"
+                                    to="brasileiros"
+                                    >
+                                        Brasileiros
+                                    </Scroll>
+                                </li>
+                                <li className="nav-item">
+                                    <Scroll
+                                    className="nav-link active"
+                                    aria-current="page"
+                                    to="canadenses"
+                                    >
+                                        Canadenses
+                                    </Scroll>
+                                </li>
+                                {useSelector(state => state.usuarioLogado) > 0 ? 
+                                    <li className="nav-item align-right">
+                                        <Link className="nav-link active" aria-current="page" to="/newwhisky">
+                                            Adicione um Whisky
+                                        </Link>
+                                    </li> : null
+                                }
+                            </ul>
+                        </div>
                     </div>
                 </nav>
                 </div>

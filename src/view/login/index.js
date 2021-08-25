@@ -54,7 +54,7 @@ function Login() {
                             <label for="floatingPassword">Senha</label>
                         </div>
                     </div>
-                    <button type="button" onClick={() => autenticar} className="btn btn-outline-dark">
+                    <button type="button" onClick={autenticar} className="btn btn-outline-dark">
                     <span className='sr-only'>Login</span>
                     {
                         carregando ? <span className="spinner-border spinner-border-sm mx-2" role="status" aria-hidden="true"></span> : null

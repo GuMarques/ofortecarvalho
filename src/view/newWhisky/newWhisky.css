@@ -1,0 +1,39 @@
+.secao {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+.margin-left-10 {
+    margin-left: 10px !important;
+}
+
+.margin-left-12 {
+    margin-left: 12px;
+}
+
+.height-100px {
+    height: 100px !important;
+}
+
+.pr-0 {
+    padding-right: 0 !important;
+}
+
+.pl-0 {
+    padding-left: 0;
+}
+
+.fileUpload {
+    cursor: pointer;
+/*     background-color: rgb(17, 152, 197); */
+    /* color: #ffffff; */
+    padding: 10px 20px;
+    margin-left: 10px;
+}
+#upload {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}

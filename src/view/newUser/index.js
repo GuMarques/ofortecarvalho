@@ -10,8 +10,6 @@ function NewUser() {
     const [email, setEmail] = useState();
     const [confirmacaoEmail, setConfirmacaoEmail] = useState();
     const [senha, setSenha] = useState();
-    const [nome, setNome] = useState();
-    const [sobrenome, setSobrenome] = useState();
     const [msgTipo, setMsgTipo] = useState();
     const [disabled, setDisabled] = useState(false);
     const [carregando, setCarregando] = useState();
@@ -34,7 +32,7 @@ function NewUser() {
         setDisabled(true);
         setMsgTipo(null);
 
-        if(!email || !senha || !confirmacaoEmail || !nome || !sobrenome) {
+        if(!email || !senha || !confirmacaoEmail) {
             setMsgTipo('erro');
             setMsg('Você não preencheu todos os campos!');
         } else {
@@ -73,30 +71,6 @@ function NewUser() {
                     <p>Por favor preencha os campos abaixo</p>
                 </div>
                 <form>
-                <div className="input-container">
-                    <div className="form-floating">
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="floatingInput"
-                        placeholder="John"
-                        onChange={(e) => setNome(e.target.value)}
-                    />
-                    <label for="floatingInput">Nome</label>
-                    </div>
-                </div>
-                <div className="input-container">
-                    <div className="form-floating">
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="floatingInput"
-                        placeholder="Wick"
-                        onChange={(e) => setSobrenome(e.target.value)}
-                    />
-                    <label for="floatingInput">Sobrenome</label>
-                    </div>
-                </div>
                 <div className="input-container">
                     <div className="form-floating">
                     <input
